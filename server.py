@@ -11,7 +11,7 @@ def get_url(url, receive_buffer=4096):
                                            
     sock = socket(AF_INET, SOCK_STREAM)
     
-    socket.connect((host, port))   
+    sock.connect((host, port))   
     sock.sendall(('GET %s HTTP/1.0\n\n' % parsed.path).encode())                          
 
     response = [sock.recv(receive_buffer).decode()]                                
@@ -25,7 +25,7 @@ def get_url(url, receive_buffer=4096):
 def create_server():
     serversocket = socket(AF_INET, SOCK_STREAM)
     try :
-        serversocket.bind(('localhost', 6000))
+        serversocket.bind(('localhost', 9000))
         serversocket.listen(5)
         while(1):
             (clientsocket, address) = serversocket.accept()
