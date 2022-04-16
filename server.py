@@ -39,7 +39,7 @@ def create_server():
             # data += "\r\n"
             # data += "<html><body>Hello World</body></html>\r\n\r\n"
 
-            data = get_url('http://www.google.com/')
+            data = get_url('http://www.facebook.com/')
             clientsocket.sendall(data.encode())
             clientsocket.shutdown(SHUT_WR)
 
