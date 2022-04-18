@@ -2,8 +2,7 @@ from socket import *
 from urllib.parse import *
 
 
-def get_url(url, receive_buffer=4096):
-    url = 'http://' + url + '/'                              
+def get_url(url, receive_buffer=4096):                              
     parsed = urlparse(url)                                                     
     try:                                                                       
         host, port = parsed.netloc.split(':')                                  
@@ -12,7 +11,7 @@ def get_url(url, receive_buffer=4096):
                                            
     sock = socket(AF_INET, SOCK_STREAM)
     
-    sock.connect((host, port))
+    sock.connect((host, port))   
     sock.sendall(('GET %s HTTP/1.0\n\n' % parsed.path).encode())                          
 
     response = [sock.recv(receive_buffer).decode()]                                
@@ -26,7 +25,7 @@ def get_url(url, receive_buffer=4096):
 def create_server():
     serversocket = socket(AF_INET, SOCK_STREAM)
     try :
-        serversocket.bind(('localhost', 9002))
+        serversocket.bind(('localhost', 6000))
         serversocket.listen(5)
         while(1):
             (clientsocket, address) = serversocket.accept()
@@ -34,9 +33,13 @@ def create_server():
             rd = clientsocket.recv(5000).decode()
             pieces = rd.split("\n")
             if(len(pieces) > 0) : print(pieces[0])
-            
-            data = get_url(rd)
-            
+
+            # data = "HTTP/1.1 200 OK\r\n"
+            # data += "Content=Type: text/html; charset=utf-8\r\n"
+            # data += "\r\n"
+            # data += "<html><body>Hello World</body></html>\r\n\r\n"
+
+            data = get_url('http://www.google.com/')
             clientsocket.sendall(data.encode())
             clientsocket.shutdown(SHUT_WR)
 
@@ -48,5 +51,5 @@ def create_server():
 
     serversocket.close()
 
-print('Access http://localhost:9001')
+print('Access http://localhost:9000')
 create_server()
