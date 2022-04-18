@@ -1,7 +1,7 @@
 import socket
 
 mysock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-mysock.connect(('127.0.0.1', 9002))
+mysock.connect(('127.0.0.1', 9006))
 cmd = input().encode()
 mysock.send(cmd)
 

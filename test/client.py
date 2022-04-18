@@ -1,9 +1,9 @@
 import socket
 
 mysock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-mysock.connect(('127.0.0.1', 6000))
-cmd = 'GET http://127.0.0.1/romeo.txt HTTP/1.0\r\n\r\n'.encode()
-mysock.send(cmd)
+mysock.connect(('127.0.0.1', 6001))
+# cmd = 'GET http://127.0.0.1/test.txt HTTP/1.0\r\n\r\n'.encode()
+mysock.send('cmd'.encode())
 
 while True:
     data = mysock.recv(512)

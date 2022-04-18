@@ -3,7 +3,7 @@ from urllib.parse import *
 
 
 def get_url(url, receive_buffer=4096):
-    url = 'http://' + url + '/'                              
+                                 
     parsed = urlparse(url)                                                     
     try:                                                                       
         host, port = parsed.netloc.split(':')                                  
@@ -26,7 +26,7 @@ def get_url(url, receive_buffer=4096):
 def create_server():
     serversocket = socket(AF_INET, SOCK_STREAM)
     try :
-        serversocket.bind(('localhost', 9002))
+        serversocket.bind(('localhost', 9006))
         serversocket.listen(5)
         while(1):
             (clientsocket, address) = serversocket.accept()
@@ -34,7 +34,10 @@ def create_server():
             rd = clientsocket.recv(5000).decode()
             pieces = rd.split("\n")
             if(len(pieces) > 0) : print(pieces[0])
-            
+            print('Start******************************')
+            print(rd, 'rrrrrrrrrrdddddddddddddddddddd')
+            # dalia = 'http://' + rd + '/' 
+            # print(dalia, 'daliaaaaaaaaaaaaaaaaaaaaaaaa')
             data = get_url(rd)
             
             clientsocket.sendall(data.encode())
@@ -48,5 +51,5 @@ def create_server():
 
     serversocket.close()
 
-print('Access http://localhost:9001')
+print('Access http://localhost:9006')
 create_server()

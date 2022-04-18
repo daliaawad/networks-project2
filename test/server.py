@@ -25,7 +25,7 @@ def get_url(url, receive_buffer=4096):
 def create_server():
     serversocket = socket(AF_INET, SOCK_STREAM)
     try :
-        serversocket.bind(('localhost', 6000))
+        serversocket.bind(('localhost', 6001))
         serversocket.listen(5)
         while(1):
             (clientsocket, address) = serversocket.accept()
@@ -51,5 +51,5 @@ def create_server():
 
     serversocket.close()
 
-print('Access http://localhost:9000')
+print('Access http://localhost:6001')
 create_server()
