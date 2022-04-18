@@ -31,15 +31,14 @@ def create_server():
         while(1):
             (clientsocket, address) = serversocket.accept()
 
-            rd = clientsocket.recv(5000).decode()
-            pieces = rd.split("\n")
+            received_data = clientsocket.recv(5000).decode()
+            pieces = received_data.split("\n")
             if(len(pieces) > 0) : print(pieces[0])
-            print('Start******************************')
-            print(rd, 'rrrrrrrrrrdddddddddddddddddddd')
-            # dalia = 'http://' + rd + '/' 
-            # print(dalia, 'daliaaaaaaaaaaaaaaaaaaaaaaaa')
-            data = get_url(rd)
-            
+            if(received_data[0] == 'G'): #GET
+                received_data = received_data[5:].split(' ')[0] #Remove 'GET' part
+                
+            received_data = 'http://' + received_data + '/'     
+            data = get_url(received_data)    
             clientsocket.sendall(data.encode())
             clientsocket.shutdown(SHUT_WR)
 
